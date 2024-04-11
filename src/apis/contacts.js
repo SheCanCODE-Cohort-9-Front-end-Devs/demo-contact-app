@@ -39,6 +39,18 @@ export const UpdateContact = (id) => {
 
 };
 
+export const AddContact = (contact) => {
+    return axios.post(`${API}/contact/add`, contact)
+        .then((response) => {
+            console.log(response.data.message);
+            return response.data.message;
+        })
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+};
+
 export const DeleteContact = (id) => {
     return axios.delete(API + "/contact/delete?id=" + id)
         .then((response) => {

@@ -12,11 +12,10 @@ const Contact = ({ contact }) => {
 
             <div className="sm:flex sm:justify-between sm:gap-4">
                 <div>
-                    <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+                    <h3 className="text-lg font-bold text-white-900 sm:text-xl">
                         {contact.fullName}
                     </h3>
-
-                    <p className="mt-1 text-xs font-medium text-gray-600">{contact.phone}</p>
+                    <p className="mt-1 text-xs font-medium text-gray-400">{contact.phone}</p>
                 </div>
 
                 <div className="hidden sm:block sm:shrink-0">
