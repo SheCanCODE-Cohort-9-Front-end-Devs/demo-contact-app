@@ -39,28 +39,33 @@ const Add = () => {
 
       AddContact(contact)
         .then(response => {
-          setLoading(false);
           setMessage({
             type: 'success',
             content: response
           });
 
-          setContact({
-            fullName: '',
-            phone: '',
-            email: ''
-          });
+          setContact({ fullName: '', phone: '', email: '' });
 
           setTimeout(() => {
-            // Using react-router-dom
             navigate('/contacts');
           },2000)
         })
         .catch((error) => {
-          setMessage({
-            type: 'error',
-            content: error
-          })
+          if (error.response.status === 500) {
+            setMessage({
+              type: 'error',
+              content: "Error adding contact!"
+            })
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+          setTimeout(() => {
+            setMessage({
+              type: "",
+              content: ""
+            });
+          },3000);
         })
     }
   };

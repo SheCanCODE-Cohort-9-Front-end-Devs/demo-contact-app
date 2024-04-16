@@ -54,15 +54,15 @@ const SignIn = () => {
             })
             .catch(error => {
                 console.log(error.message);
-                // Timing out the loader
-                setTimeout(() => {
-                    setLoading(false);
-                }, 2000);
-                // Response message
-                setResponse({
-                    type: "error",
-                    content: error.message
-                });
+                if (error.response.status === 500) {
+                    setResponse({
+                        type: 'error',
+                        content: "Sign in failed"
+                    });
+                }
+            })
+            .finally(() => {
+                setLoading(false);
             })
 
     }

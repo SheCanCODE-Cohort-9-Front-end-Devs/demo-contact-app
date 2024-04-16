@@ -42,8 +42,14 @@ export const UpdateContact = (id) => {
 export const AddContact = (contact) => {
     return axios.post(`${API}/contact/add`, contact)
         .then((response) => {
-            console.log(response.data.message);
-            return response.data.message;
+            console.log(response.data);
+            if (response.data.status === 201) {
+                return response.data.message;
+            } else if (response.data.status === 400) {
+                return response.data.error;
+            } else if (response.data.status === 500) {
+                return response.data.error;
+            }
         })
         .catch((err) => {
             console.log(err);
@@ -58,7 +64,7 @@ export const DeleteContact = (id) => {
             return response.data.message;
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err.message);
             throw err;
         });
 };

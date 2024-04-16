@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { DeleteContact, FetchContactById } from "../apis/contacts";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import ResponseMessage from "../components/ResponseMessage";
 
 const ContactDetails = () => {
   const params = useParams();
-  const navigate = useNavigate();
 
   const [contact, setContact] = useState({});
   const [message, setMessage] = useState({
@@ -14,7 +14,7 @@ const ContactDetails = () => {
 
   useEffect(() => {
     FetchContactById(params.contactId)
-     .then((response) => {
+      .then((response) => {
         setContact(response);
       })
       .catch((error) => {
@@ -26,23 +26,32 @@ const ContactDetails = () => {
     event.preventDefault();
 
     DeleteContact(params.contactId)
-     .then((response) => {
+      .then((response) => {
         setMessage({
-          type:'success',
+          type: 'success',
           content: response
         });
-        
+
         setTimeout(() => {
-          // Vanilla JavaScript, it reloads the website
           window.location.replace('/contacts/');
-          // Using react-router-dom
-          // navigate('/');
-          
-        },2000)
+        }, 2000)
       })
-     .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {
+        if (error.response.status === 500) {
+          setMessage({
+            type: 'error',
+            content: "Unable to delete contact"
+          })
+        }
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setMessage({
+            type: "",
+            content: ""
+          });
+        }, 3000);
+      })
   }
 
   return (
@@ -53,8 +62,7 @@ const ContactDetails = () => {
 
       <button onClick={deleteContact} type="button">Delete</button>
 
-      {message.type === 'success' && <p className="px-3 py-2 text-green-700 bg-green-200 rounded-sm">{message.content}</p>}
-      {message.type === 'error' && <p className="px-3 py-2 text-red-700 bg-red-200 rounded-sm">{message.content}</p>}
+      <ResponseMessage type={message.type} content={message.content} />
 
     </div>
   )

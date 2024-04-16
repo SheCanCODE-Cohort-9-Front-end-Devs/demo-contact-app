@@ -2,6 +2,12 @@ import { Link } from "react-router-dom"
 import Navigation from "./Navigation"
 
 const Header = () => {
+  const handleSignOut = (e) => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    window.location.replace('/');
+  }
+
   return (
     <header>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -19,6 +25,7 @@ const Header = () => {
             >
               Create Contact
             </Link>
+            <button onClick={handleSignOut} className="block rounded-lg bg-slate-800 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700 focus:outline-none focus:ring" type="button">Sign out</button>
           </div>
         </div>
       </div>

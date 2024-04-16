@@ -39,25 +39,20 @@ const SignUp = () => {
                     setLoading(false);
                 }, 2000)
                 // Clearing the input form
-                setSignUpData({
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    password: ""
-                })
+                setSignUpData({ firstName: "", lastName: "", email: "", password: "" })
                 window.location.replace('/auth/signin');
             })
             .catch(error => {
                 console.log(error.message);
-                // Timing out the loader
-                setTimeout(() => {
-                    setLoading(false);
-                }, 2000);
-                // Response message
-                setResponse({
-                    type: "error",
-                    content: error.message
-                });
+                if (error.response.status === 500) {
+                    setMessage({
+                        type: 'error',
+                        content: "Sign up failed"
+                    });
+                }
+            })
+            .finally(() => {
+                setLoading(false);
             })
 
     }
