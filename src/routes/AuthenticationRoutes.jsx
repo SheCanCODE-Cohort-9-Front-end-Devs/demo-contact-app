@@ -1,20 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Main from '../pages/Main';
-import Home from '../pages/Home';
-import ContactDetails from '../pages/ContactDetails';
-import UpdateContact from '../pages/UpdateContact';
-import ErrorPage from '../pages/ErrorPage';
+import SignIn from '../pages/auth/SignIn';
+import SignUp from '../pages/auth/SignUp';
+import AuthPages from '../pages/auth/AuthPages';
 
 const AuthenticationRoutes = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Main />}>
-                    <Route path="" element={<Home />} />
-                    <Route path="/:contactId" element={<ContactDetails />} />
-                    <Route path="/update/:contactId" element={<UpdateContact />} />
-                    <Route path="*" element={<ErrorPage />} />
+                <Route path="/auth" element={<AuthPages />}>
+                    <Route path="signin" element={<SignIn />} />
+                    <Route path="signup" element={<SignUp />} />
                 </Route>
             </Routes>
         </Router>
