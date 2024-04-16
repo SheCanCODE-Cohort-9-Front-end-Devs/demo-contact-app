@@ -16,7 +16,7 @@ export const SignIn = (signInData) => {
             //   }
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err.message);
             throw err;
         });
 };
@@ -25,13 +25,9 @@ export const SignUp = (signUpData) => {
     return axios.post(`${API}/auth/signup`, signUpData)
         .then((response) => {
             return response.data;
-            // The response is structured like this:
-            // {
-            //     "message": "Account created!"
-            //   }
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err.message);
             throw err;
         });
 };
