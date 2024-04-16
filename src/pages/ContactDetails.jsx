@@ -34,7 +34,7 @@ const ContactDetails = () => {
         
         setTimeout(() => {
           // Vanilla JavaScript, it reloads the website
-          window.location.replace('/');
+          window.location.replace('/contacts/');
           // Using react-router-dom
           // navigate('/');
           

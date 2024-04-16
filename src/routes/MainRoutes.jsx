@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Main from '../pages/Main';
 import Home from '../pages/Home';
 import ContactDetails from '../pages/ContactDetails';
@@ -11,11 +11,11 @@ const MainRoutes = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Main />}>
+                <Route path="/contacts/" element={<Main /> }>
                     <Route path="" element={<Home />} />
-                    <Route path="/add" element={<Add />} />
-                    <Route path="/:contactId" element={<ContactDetails />} />
-                    <Route path="/update/:contactId" element={<UpdateContact />} />
+                    <Route path="add" element={<Add />} />
+                    <Route path=":contactId" element={<ContactDetails />} />
+                    <Route path="update/:contactId" element={<UpdateContact />} />
                     <Route path="*" element={<ErrorPage />} />
                 </Route>
             </Routes>

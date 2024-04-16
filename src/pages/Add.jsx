@@ -4,17 +4,10 @@ import { AddContact } from "../apis/contacts";
 import { useNavigate } from "react-router-dom";
 
 const Add = () => {
-  const [message, setMessage] = useState({
-    type: '',
-    content: ''
-  });
   const navigate = useNavigate();
+  const [message, setMessage] = useState({ type: '', content: '' });
   const [loading, setLoading] = useState(false);
-  const [contact, setContact] = useState({
-    fullName: '',
-    phone: '',
-    email: ''
-  });
+  const [contact, setContact] = useState({ fullName: '', phone: '', email: '' });
 
   // const [fullName, setFullName] = useState('');
   // const [email, setEmail] = useState('');
@@ -60,8 +53,7 @@ const Add = () => {
 
           setTimeout(() => {
             // Using react-router-dom
-            navigate('/');
-            
+            navigate('/contacts');
           },2000)
         })
         .catch((error) => {
