@@ -34,27 +34,25 @@ const SignUp = () => {
                     type: "success",
                     content: response.message
                 });
-                // Timing out the loader
-                setTimeout(() => {
-                    setLoading(false);
-                }, 2000)
+            
                 // Clearing the input form
                 setSignUpData({ firstName: "", lastName: "", email: "", password: "" })
-                window.location.replace('/auth/signin');
+                window.location.replace('/signin');
             })
             .catch(error => {
                 console.log(error.message);
-                if (error.response.status === 500) {
-                    setMessage({
+                if (error.response.status === 500 || error.response.status === 400) {
+                    setResponse({
                         type: 'error',
                         content: "Sign up failed"
                     });
                 }
             })
             .finally(() => {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000)
             })
-
     }
 
     const handleInputChange = (e) => {

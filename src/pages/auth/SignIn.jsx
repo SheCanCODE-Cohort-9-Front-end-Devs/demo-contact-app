@@ -54,7 +54,7 @@ const SignIn = () => {
             })
             .catch(error => {
                 console.log(error.message);
-                if (error.response.status === 500) {
+                if (error.response.status === 500 || error.response.status === 400) {
                     setResponse({
                         type: 'error',
                         content: "Sign in failed"
